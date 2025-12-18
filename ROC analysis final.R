@@ -5,6 +5,7 @@ library(grid)
 library(cowplot)
 library(patchwork)
 
+
 # 1) ROC-analyse
 
 # Settings
@@ -17,7 +18,7 @@ df <- Datafile %>%
   filter(!is.na(Culture), !is.na(CT_value)) %>%
   mutate(
     Culture = factor(tolower(trimws(Culture)),
-                     levels = c("negativ", "positiv")),
+                     levels = c("negative", "positive")),
     CT_value = as.numeric(CT_value)
   )
 
@@ -27,7 +28,7 @@ direction <- ">"
 # ROC + AUC (DeLong CI)
 roc_ct <- pROC::roc(response = df$Culture,
                     predictor = df$CT_value,
-                    levels   = c("negativ","positiv"),
+                    levels   = c("negative","positive"),
                     direction = direction,
                     quiet = TRUE)
 
@@ -47,13 +48,14 @@ cp_ci <- function(x, n) {
   as.numeric(binom.test(x, n)$conf.int)
 }
 
+
 perf_table <- lapply(cutoffs, function(t) {
   pred_pos <- df$CT_value <= t
   
-  TP <- sum(pred_pos & df$Culture == "positiv")
-  FN <- sum(!pred_pos & df$Culture == "positiv")
-  TN <- sum(!pred_pos & df$Culture == "negativ")
-  FP <- sum(pred_pos & df$Culture == "negativ")
+  TP <- sum(pred_pos & df$Culture == "positive")
+  FN <- sum(!pred_pos & df$Culture == "positive")
+  TN <- sum(!pred_pos & df$Culture == "negative")
+  FP <- sum(pred_pos & df$Culture == "negative")
   
   se_den  <- TP + FN
   sp_den  <- TN + FP
@@ -133,10 +135,10 @@ thresholds <- seq(ct_min, ct_max, by = 0.1)
 
 metrics <- map_dfr(thresholds, function(t) {
   pred_pos <- df$CT_value <= t  # lav Ct = positiv
-  TP <- sum(pred_pos & df$Culture == "positiv")
-  FN <- sum(!pred_pos & df$Culture == "positiv")
-  TN <- sum(!pred_pos & df$Culture == "negativ")
-  FP <- sum(pred_pos & df$Culture == "negativ")
+  TP <- sum(pred_pos & df$Culture == "positive")
+  FN <- sum(!pred_pos & df$Culture == "positive")
+  TN <- sum(!pred_pos & df$Culture == "negative")
+  FP <- sum(pred_pos & df$Culture == "negative")
   tibble(
     Ct = t,
     Sensitivity = if ((TP + FN) > 0) TP / (TP + FN) else NA_real_,
@@ -155,7 +157,7 @@ plot_df <- metrics |>
                       names_to = "Measure", values_to = "Percent")
 
 p <- ggplot(plot_df, aes(x = Ct, y = Percent, linetype = Measure)) +
-  geom_line(linewidth = 0.6, color = "black", na.rm = TRUE) +   # <--- tyndere linjer
+  geom_line(linewidth = 0.6, color = "black", na.rm = TRUE) + 
   scale_y_continuous(
     labels = percent_format(accuracy = 1),
     limits = c(0, 1),
