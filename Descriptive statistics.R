@@ -89,7 +89,19 @@ Datafile %>%
     median_Days_from_symptom_onset_to_first_sampling = median(Days_from_symptom_onset_to_first_sampling, na.rm = TRUE),
     Q1 = quantile(Days_from_symptom_onset_to_first_sampling, 0.25, na.rm = TRUE),
     Q3 = quantile(Days_from_symptom_onset_to_first_sampling, 0.75, na.rm = TRUE))
+#---------------------------------------------------------------------------------
+Datafile %>%
+  group_by(Culture) %>%
+  summarise(
+    median_Symptoms_duration = median(Symptoms_duration, na.rm = TRUE),
+    Q1 = quantile(Symptoms_duration, 0.25, na.rm = TRUE),
+    Q3 = quantile(Symptoms_duration, 0.75, na.rm = TRUE))
 
+Datafile %>%
+  summarise(
+    median_Symptoms_duration = median(Symptoms_duration, na.rm = TRUE),
+    Q1 = quantile(Symptoms_duration, 0.25, na.rm = TRUE),
+    Q3 = quantile(Symptoms_duration, 0.75, na.rm = TRUE))
 #---------------------------------------------------------------------------------
 Datafile %>%
   group_by(Culture) %>%
@@ -289,3 +301,4 @@ Datafile %>%
              prop = n / sum(n))
   ) %>%
   select(Culture, Dyspnea, n, prop)
+
