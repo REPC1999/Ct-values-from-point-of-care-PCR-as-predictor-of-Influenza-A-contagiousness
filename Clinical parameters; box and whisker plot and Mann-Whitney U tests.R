@@ -48,13 +48,13 @@ p3_inf <- ggplot(data=Datafile, aes(x = Culture, y = Saturation)) +
     panel.grid.minor = element_blank()
   )
 #-----------------------------------------------------------------------------------------------
-p4_inf <- ggplot(data=Datafile, aes(x = Culture, y = Oxygen)) +
+p4_inf <- ggplot(data=Datafile, aes(x = Culture, y = Symptoms_duration)) +
   geom_jitter(width = 0.05, size = 1.8, color = "grey20", alpha=0.7) +
   geom_boxplot(fill='grey90', color='black', alpha = 0.5, width = 0.4, outlier.shape = NA) +
   labs(
     title = "D",
     x = "Culture",
-    y = "Oxygen flow rate (L/min)"
+    y = "Symptom duration at admission (Days)"
   ) +
   theme_minimal(base_size = 12) +
   theme(
@@ -62,13 +62,13 @@ p4_inf <- ggplot(data=Datafile, aes(x = Culture, y = Oxygen)) +
     panel.grid.minor = element_blank()
   )
 #-----------------------------------------------------------------------------------------------
-p5_inf <- ggplot(data=Datafile, aes(x = Culture, y = Leukocyttes)) +
+p5_inf <- ggplot(data=Datafile, aes(x = Culture, y = Days_since_vaccination)) +
   geom_jitter(width = 0.05, size = 1.8, color = "grey20", alpha=0.7) +
   geom_boxplot(fill='grey90', color='black', alpha = 0.5, width = 0.4, outlier.shape = NA) +
   labs(
     title = "E",
     x = "Culture",
-    y = "Leukocytes (mia/L)  "
+    y = "Time since vaccination (Days)"
   ) +
   theme_minimal(base_size = 12) +
   theme(
@@ -98,7 +98,7 @@ p1_inf+p2_inf+p3_inf+p4_inf+p5_inf+p6_inf
 
 
 
-vars <- c("CT_value", "Temperature", "Oxygen", "Saturation", "Leukocyttes", "CRP")
+vars <- c("CT_value", "Temperature", "Saturation",  "Symptoms_duration" "Days_since_vaccination", "CRP")
 
 results <- lapply(vars, function(v) {
   Datafile %>%
@@ -112,6 +112,7 @@ results <- lapply(vars, function(v) {
   bind_rows()
 
 results
+
 
 
 
