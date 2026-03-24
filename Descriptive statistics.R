@@ -316,3 +316,18 @@ Datafile %>%
              prop = n / sum(n))
   ) %>%
   select(Culture, Mortality, n, prop)
+
+#---------------------------------------------------------------------------------
+Datafile %>%
+  group_by(Culture, ICU) %>%
+  summarise(n = n(), .groups = "drop_last") %>%
+  mutate(prop = n / sum(n)) %>%
+  ungroup() %>%
+  bind_rows(
+    Datafile %>%
+      group_by(ICU) %>%
+      summarise(n = n(), .groups = "drop") %>%
+      mutate(Culture = "Total",
+             prop = n / sum(n))
+  ) %>%
+  select(Culture, ICU, n, prop)
