@@ -1,39 +1,5 @@
 #Test for normal destribution
 library(tidyverse)
-#--------------------------------------------------------------------------------
-qqnorm(Datafile$Age)
-qqline(Datafile$Age)
-hist(Datafile$Age, breaks = 6)
-#--------------------------------------------------------------------------------
-hist(Datafile$BMI, breaks = 8)
-qqnorm(Datafile$BMI)
-qqline(Datafile$BMI)
-#--------------------------------------------------------------------------------
-hist(Datafile$Admission_time, breaks = 8)
-qqnorm(Datafile$Admission_time)
-qqline(Datafile$Admission_time)
-#--------------------------------------------------------------------------------
-hist(Datafile$Days_from_symptom_onset_to_first_sampling, breaks = 8)
-qqnorm(Datafile$Days_from_symptom_onset_to_first_sampling)
-qqline(Datafile$Days_from_symptom_onset_to_first_sampling)
-#--------------------------------------------------------------------------------
-hist(Datafile$BMI, breaks = 8)
-qqnorm(Datafile$BMI)
-qqline(Datafile$BMI)
-#--------------------------------------------------------------------------------
-hist(Datafile$BMI, breaks = 8)
-qqnorm(Datafile$BMI)
-qqline(Datafile$BMI)
-#--------------------------------------------------------------------------------
-hist(Datafile$`Dage i isolation`, breaks = 8)
-qqnorm(Datafile$`Dage i isolation`)
-qqline(Datafile$`Dage i isolation`)
-#--------------------------------------------------------------------------------
-hist(Datafile$Days_since_vaccination, breaks = 8)
-qqnorm(Datafile$Days_since_vaccination)
-qqline(Datafile$Days_since_vaccination)
-
-
 #---------------------------------------------------------------------------------
 #Descriptiv statistics
 Datafile %>%
