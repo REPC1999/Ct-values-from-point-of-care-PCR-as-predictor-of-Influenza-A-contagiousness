@@ -1,6 +1,8 @@
 crp_col  <- "CRP"
 leuk_col <- "Leukocyttes"
 sat_col  <- "Saturation"
+POCT_time_to_Swab_time_col <- 'POCT_time_to_Swab_time'
+
 
 median_iqr <- function(x) {
   x <- as.character(x)
@@ -13,11 +15,12 @@ median_iqr <- function(x) {
 }
 
 resultat <- data.frame(
-  Variabel = c("CRP", "Leukocytes", "Saturation"),
+  Variabel = c("CRP", "Leukocytes", "Saturation", "POCT_time_to_Swab_time"),
   Median_IQR = c(
     median_iqr(Datafile[[crp_col]]),
     median_iqr(Datafile[[leuk_col]]),
-    median_iqr(Datafile[[sat_col]])
+    median_iqr(Datafile[[sat_col]]),
+    median_iqr(Datafile[[POCT_time_to_Swab_time_col]])
   )
 )
 
