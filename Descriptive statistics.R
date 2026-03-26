@@ -106,6 +106,47 @@ Datafile %>%
     Q3 = quantile(CT_value, 0.75, na.rm = TRUE)
   )
 
+#----------------------------------------------------------------
+Datafile %>%
+  group_by(Culture) %>%
+  summarise(
+    median_Temperature = median(Temperature, na.rm = TRUE),
+    Q1 = quantile(Temperature, 0.25, na.rm = TRUE),
+    Q3 = quantile(Temperature, 0.75, na.rm = TRUE)
+  )
+#----------------------------------------------------------------
+Datafile %>%
+  group_by(Culture) %>%
+  summarise(
+    median_Saturation = median(Saturation, na.rm = TRUE),
+    Q1 = quantile(Saturation, 0.25, na.rm = TRUE),
+    Q3 = quantile(Saturation, 0.75, na.rm = TRUE)
+  )
+#----------------------------------------------------------------
+Datafile %>%
+  group_by(Culture) %>%
+  summarise(
+    median_Symptoms_duration = median(Symptoms_duration, na.rm = TRUE),
+    Q1 = quantile(Symptoms_duration, 0.25, na.rm = TRUE),
+    Q3 = quantile(Symptoms_duration, 0.75, na.rm = TRUE)
+  )
+#----------------------------------------------------------------
+Datafile %>%
+  group_by(Culture) %>%
+  summarise(
+    median_Days_since_vaccination = median(Days_since_vaccination, na.rm = TRUE),
+    Q1 = quantile(Days_since_vaccination, 0.25, na.rm = TRUE),
+    Q3 = quantile(Days_since_vaccination, 0.75, na.rm = TRUE)
+  )
+
+#----------------------------------------------------------------
+Datafile %>%
+  group_by(Culture) %>%
+  summarise(
+    median_CRP = median(CRP, na.rm = TRUE),
+    Q1 = quantile(CRP, 0.25, na.rm = TRUE),
+    Q3 = quantile(CRP, 0.75, na.rm = TRUE)
+  )
 
 #---------------------------------------------------------------------------------
 
