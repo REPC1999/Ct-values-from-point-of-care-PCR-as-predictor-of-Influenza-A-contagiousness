@@ -99,6 +99,17 @@ Datafile %>%
 #---------------------------------------------------------------------------------
 
 Datafile %>%
+  group_by(Culture) %>%
+  summarise(
+    median_CT = median(CT_value, na.rm = TRUE),
+    Q1 = quantile(CT_value, 0.25, na.rm = TRUE),
+    Q3 = quantile(CT_value, 0.75, na.rm = TRUE)
+  )
+
+
+#---------------------------------------------------------------------------------
+
+Datafile %>%
   group_by(Culture, Gender) %>%
   summarise(n = n(), .groups = "drop_last") %>%
   mutate(prop = n / sum(n)) %>%
